@@ -1,15 +1,20 @@
-import {useEffect} from "react";
+import {useEffect, useRef, useState} from "react";
 
 const {VK} = window;
 VK.init({apiId: 51775610});
 
 function App() {
+    let [vkLink, setVkLink] = useState('https://vk.com/energizet');
+    let inputFileRef = useRef();
+
     useEffect(() => {
-        VK.Widgets.Auth("vk_auth", {authUrl: "/auth"});
+        //VK.Widgets.Auth("vk_auth", {authUrl: "/auth"});
     }, []);
+
     return (
         <>
             <button onClick={async () => {
+
                 let user = {
                     uid: 144273712,
                     firstName: 'Алексей',
@@ -26,9 +31,43 @@ function App() {
                     },
                 }).then(d => d.json());
                 console.log(token);
-            }}>Auth
+
+            }}>
+                Auth
             </button>
             <div id="vk_auth"></div>
+            <input type="text" value={vkLink} onChange={e => setVkLink(e.target.value)}/>
+            <input type="file" ref={inputFileRef}/>
+            <button onClick={async () => {
+                let [file] = inputFileRef.current.files;
+                if (file == null) {
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append('file', file, file.name);
+                let fileRes = await fetch(process.env.REACT_APP_API_URL + '/upload', {
+                    method: "POST",
+                    body: formData,
+                }).then(d => d.json());
+
+                let saveReq = {
+                    id: fileRes.id,
+                    title: file.name,
+                    vkLink: vkLink,
+                };
+                let saveRes = await fetch(process.env.REACT_APP_API_URL + '/upload/save', {
+                    method: 'POST',
+                    body: JSON.stringify(saveReq),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }).then(d => d.text());
+                console.log(saveRes);
+
+            }}>
+                Upload
+            </button>
         </>
     );
 }

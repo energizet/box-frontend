@@ -1,18 +1,25 @@
-﻿import React from 'react';
-import {useLoaderData} from "react-router-dom";
+﻿import React, {Suspense} from 'react';
+import {Await, useLoaderData} from "react-router-dom";
 
 const File = () => {
-    let file = useLoaderData();
+    let {file} = useLoaderData();
 
     return (
-        file == null ?
-            <div>Not found</div> :
-            <div id="file">
-                <div>File: {file.title}</div>
-                <div>For user:</div>
-                <img src={file.vkUser.photo} alt="user photo"/>
-                <div>{file.vkUser.first_name} {file.vkUser.last_name}</div>
-            </div>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Await resolve={file}>
+                {
+                    file => file == null ?
+                        <div>Not found</div> :
+                        <div id="file">
+                            <div>File: {file.title}</div>
+                            <div>For user:</div>
+                            <img src={file.vkUser.photo} alt="user photo"/>
+                            <div>{file.vkUser.first_name} {file.vkUser.last_name}</div>
+                        </div>
+                }
+            </Await>
+        </Suspense>
+
     );
 };
 

@@ -1,6 +1,6 @@
 import {
     createBrowserRouter,
-    createRoutesFromElements,
+    createRoutesFromElements, defer,
     Route,
     RouterProvider
 } from "react-router-dom";
@@ -15,7 +15,7 @@ function App() {
                 <Route path="/" element={<Layout/>}>
                     <Route path="upload" element={<Upload/>}/>
                     <Route path="file/:id" element={<File/>}
-                           loader={({params}) => File.loader(params)}
+                           loader={({params}) => defer({file: File.loader(params)})}
                     />
                 </Route>
             )

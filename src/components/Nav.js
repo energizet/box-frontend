@@ -1,11 +1,15 @@
 ﻿import React from 'react';
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const Nav = () => {
+    let navStyle = ({isActive}) => ({
+        color: isActive ? 'red' : 'black',
+    });
+    
     return (
         <nav>
-            <Link to="/upload">Upload</Link>
-            <Link to="/file/135ba2f2-03af-44b6-be44-e923d585b6d2">new3.png</Link>
+            <NavLink to="/upload" style={navStyle}>Upload</NavLink>
+            <NavLink to="/file/135ba2f2-03af-44b6-be44-e923d585b6d2" style={navStyle}>new3.png</NavLink>
         </nav>
     );
 };

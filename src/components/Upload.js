@@ -1,15 +1,15 @@
-﻿import React, {useRef, useState} from 'react';
+﻿import React, {useState} from 'react';
 
 const Upload = () => {
     let [vkLink, setVkLink] = useState('https://vk.com/energizet');
-    let inputFileRef = useRef();
+    let [inputFile, setInputFile] = useState(null);
 
     return (
         <div id="upload">
             <input type="text" value={vkLink} onChange={e => setVkLink(e.target.value)}/>
-            <input type="file" ref={inputFileRef}/>
+            <input type="file" onChange={e => setInputFile(e.target.files[0])}/>
             <button onClick={async () => {
-                let [file] = inputFileRef.current.files;
+                let file = inputFile;
                 if (file == null) {
                     return;
                 }

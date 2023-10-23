@@ -1,12 +1,20 @@
 ﻿import React, {Suspense} from 'react';
-import {Await, useLoaderData} from "react-router-dom";
+import {Await, useAsyncError, useAsyncValue, useLoaderData, useRouteError} from "react-router-dom";
+
+function ErrorFile() {
+    let error = useAsyncError();
+
+    return (
+        <div>{error.message}</div>
+    );
+}
 
 const File = () => {
     let {file} = useLoaderData();
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <Await resolve={file}>
+            <Await resolve={file} errorElement={<ErrorFile/>}>
                 {
                     file => file == null ?
                         <div>Not found</div> :

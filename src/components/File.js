@@ -22,7 +22,7 @@ const File = () => {
                             <div>File: {file.title}</div>
                             <div>For user:</div>
                             <img src={file.vkUser.photo} alt="user photo"/>
-                            <div>{file.vkUser.first_name} {file.vkUser.last_name}</div>
+                            <div>{file.vkUser.firstName} {file.vkUser.lastName}</div>
                         </div>
                 }
             </Await>

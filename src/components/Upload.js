@@ -32,7 +32,7 @@ const Upload = () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                }).then(d => d.text());
+                }).then(d => d.json());
                 console.log(saveRes);
 
             }}>

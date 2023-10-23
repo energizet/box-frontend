@@ -16,7 +16,7 @@ const Upload = () => {
 
                 let formData = new FormData();
                 formData.append('file', file, file.name);
-                let fileRes = await fetch(process.env.REACT_APP_API_URL + '/upload', {
+                let fileRes = await fetch(process.env.REACT_APP_API_URL + '/file/upload', {
                     method: "POST",
                     body: formData,
                 }).then(d => d.json());
@@ -26,7 +26,7 @@ const Upload = () => {
                     title: file.name,
                     vkLink: vkLink,
                 };
-                let saveRes = await fetch(process.env.REACT_APP_API_URL + '/upload/save', {
+                let saveRes = await fetch(process.env.REACT_APP_API_URL + '/file/save', {
                     method: 'POST',
                     body: JSON.stringify(saveReq),
                     headers: {

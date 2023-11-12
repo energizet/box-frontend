@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import {Await, useAsyncError, useLoaderData} from "react-router-dom";
 
-function ErrorFile() {
+function Error() {
     let error = useAsyncError();
 
     return (
@@ -14,7 +14,7 @@ const File = () => {
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <Await resolve={file} errorElement={<ErrorFile/>}>
+            <Await resolve={file} errorElement={<Error/>}>
                 {
                     file => FilePage(file)
                 }

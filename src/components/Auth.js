@@ -1,41 +1,71 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 const {VK} = window;
 VK.init({apiId: 51775610});
 
 const Auth = () => {
+    let [user, setUser] = useState();
+    let [token, setToken] = useState(sessionStorage.getItem('jwt') ?? '');
+
     useEffect(() => {
-        //VK.Widgets.Auth("vk_auth", {authUrl: "/auth"});
-    }, []);
+        sessionStorage.setItem('jwt', token);
+        Auth.loader().then(auth => setUser(auth));
+    }, [token]);
+
+    useEffect(() => {
+        if (user != null) {
+            return;
+        }
+
+        VK.Widgets.Auth("vk_auth", {onAuth});
+    }, [user]);
+
+    if (user === undefined) {
+        return <div>Loading...</div>;
+    }
+
+    async function onAuth(user) {
+        let token = await fetch(process.env.REACT_APP_API_URL + '/auth', {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then(d => d.json());
+        setToken(token.token);
+        console.log(token);
+    }
 
     return (
         <div id="auth">
-            <button onClick={async () => {
-
-                let user = {
-                    uid: 144273712,
-                    firstName: 'Алексей',
-                    lastName: 'Крикунов',
-                    photo: 'https://sun1-89.userapi.com/s/v1/if2/xznq1fPzwxlZmmwq7ADhVURNNmYJFPnfRO80qxEiqrK1Rr69ZSXu-yccqFH26WpiPWxur7lsRT5hw9-Nqrn_AiVC.jpg?size=200x200&quality=96&crop=75,0,450,450&ava=1',
-                    photoRec: 'https://sun1-89.userapi.com/s/v1/if2/fxXpA0f4rgSRT8OK9uSzt8sObQW2kRH-M0ef-AAZWt1Mp4-ZeX8QW-Jy35wHSMNvZ4v4T2nXbac8s6rYI5qnXWwV.jpg?size=50x50&quality=96&crop=75,0,450,450&ava=1',
-                    hash: '02c81c732cabf87d941f821e17ef9bc9'
-                };
-                let token = await fetch(process.env.REACT_APP_API_URL + '/auth', {
-                    method: 'POST',
-                    body: JSON.stringify(user),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }).then(d => d.json());
-                sessionStorage.setItem('jwt', token.token)
-                console.log(token);
-
-            }}>
-                Auth
-            </button>
-            <div id="vk_auth"></div>
+            {
+                user == null ?
+                    <div id="vk_auth"></div> :
+                    <>
+                        <img src={user.photo} alt="avatar"/>
+                        <div>{user.firstName} {user.lastName}</div>
+                        <button onClick={() => setToken('')}>Logout</button>
+                    </>
+            }
         </div>
     );
+};
+
+Auth.loader = async () => {
+    let user = await fetch(process.env.REACT_APP_API_URL + `/auth/info`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('jwt'),
+            },
+        }
+    );
+
+    if (user.ok === false) {
+        return null;
+    }
+
+    return await user.json();
 };
 
 export default Auth;

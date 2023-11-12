@@ -13,7 +13,7 @@ function App() {
         <RouterProvider router={createBrowserRouter(
             createRoutesFromElements(
                 <Route path="/" element={<Layout/>}>
-                    <Route path="upload" element={<Upload/>}/>
+                    <Route path="" element={<Upload/>}/>
                     <Route path="file/:id" element={<File/>}
                            loader={({params}) => defer({file: File.loader(params)})}
                     />

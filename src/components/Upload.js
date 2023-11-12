@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
+import {useNavigate} from "react-router-dom";
 
 const Upload = () => {
-    let [vkLink, setVkLink] = useState('https://vk.com/energizet');
+    let navigate = useNavigate();
+    let [vkLink, setVkLink] = useState('');
     let [inputFile, setInputFile] = useState(null);
 
     return (
@@ -33,8 +35,8 @@ const Upload = () => {
                         'Content-Type': 'application/json',
                     },
                 }).then(d => d.json());
-                console.log(saveRes);
 
+                navigate(`/file/${fileRes.id}`);
             }}>
                 Upload
             </button>

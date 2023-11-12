@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import {Outlet} from "react-router-dom";
 import Auth from "./Auth";
 import Nav from "./Nav";

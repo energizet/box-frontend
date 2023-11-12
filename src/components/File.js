@@ -1,4 +1,4 @@
-﻿import React, {Suspense} from 'react';
+import React, {Suspense} from 'react';
 import {Await, useAsyncError, useAsyncValue, useLoaderData, useRouteError} from "react-router-dom";
 
 function ErrorFile() {

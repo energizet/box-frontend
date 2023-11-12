@@ -1,4 +1,4 @@
-﻿import React, {useState} from 'react';
+import React, {useState} from 'react';
 
 const Upload = () => {
     let [vkLink, setVkLink] = useState('https://vk.com/energizet');

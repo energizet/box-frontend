@@ -1,4 +1,4 @@
-﻿import React, {useEffect} from 'react';
+import React, {useEffect} from 'react';
 
 const {VK} = window;
 VK.init({apiId: 51775610});

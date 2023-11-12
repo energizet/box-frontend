@@ -34,13 +34,13 @@ function FilePage(file) {
         if (file.type.startsWith('image') === false) {
             let a = document.createElement('a');
             a.href = url;
-            a.download = file.type.replace('/', '.');
+            a.download = file.name;
             a.click();
 
             return <div>Loading...</div>;
         }
 
-        return <img src={url} alt="user photo"/>
+        return <img src={url} alt={file.name}/>
     }
 
 
@@ -53,29 +53,36 @@ function FilePage(file) {
 }
 
 File.loader = async (params) => {
-    let file = await fetch(process.env.REACT_APP_API_URL + `/file/${params.id}/download`,
+    let infoResponse = await fetch(process.env.REACT_APP_API_URL + `/file/${params.id}`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+    );
+
+    if (infoResponse.ok === false) {
+        return null;
+    }
+
+    let info = await infoResponse.json();
+
+    let fileResponse = await fetch(process.env.REACT_APP_API_URL + `/file/${params.id}/download`,
         {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + sessionStorage.getItem('jwt'),
             },
-        });
+        }
+    );
 
-    if (file.ok) {
-        return await file.blob();
+    if (fileResponse.ok) {
+        let file = await fileResponse.blob();
+        file.name = info.title;
+        return file;
     }
 
-    let info = await fetch(process.env.REACT_APP_API_URL + `/file/${params.id}`,
-        {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-    if (info.ok === false) {
-        return null;
-    }
-
-    return await info.json();
+    return info;
 };
 
 export default File;

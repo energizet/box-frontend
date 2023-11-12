@@ -27,6 +27,7 @@ const Auth = () => {
                         'Content-Type': 'application/json',
                     },
                 }).then(d => d.json());
+                sessionStorage.setItem('jwt', token.token)
                 console.log(token);
 
             }}>

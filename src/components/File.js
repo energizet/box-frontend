@@ -32,7 +32,13 @@ const File = () => {
 };
 
 File.loader = async (params) => {
-    let file = await fetch(process.env.REACT_APP_API_URL + `/file/${params.id}`);
+    let file = await fetch(process.env.REACT_APP_API_URL + `/file/${params.id}`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('jwt'),
+            },
+        });
     if (file.ok === false) {
         return null;
     }

@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
-
-const {VK} = window;
-VK.init({apiId: 51775610});
+import VkAuthWidget from "./VkAuthWidget";
 
 const Auth = () => {
     let [user, setUser] = useState();
@@ -11,14 +9,6 @@ const Auth = () => {
         sessionStorage.setItem('jwt', token);
         Auth.loader().then(auth => setUser(auth));
     }, [token]);
-
-    useEffect(() => {
-        if (user != null) {
-            return;
-        }
-
-        VK.Widgets.Auth("vk_auth", {onAuth});
-    }, [user]);
 
     if (user === undefined) {
         return <div>Loading...</div>;
@@ -40,7 +30,7 @@ const Auth = () => {
         <div id="auth">
             {
                 user == null ?
-                    <div id="vk_auth"></div> :
+                    <VkAuthWidget onAuth={onAuth}/> :
                     <>
                         <img src={user.photo} alt="avatar"/>
                         <div>{user.firstName} {user.lastName}</div>

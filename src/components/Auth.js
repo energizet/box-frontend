@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import VkAuthWidget from "./VkAuthWidget";
 
 const Auth = () => {
@@ -30,12 +30,28 @@ const Auth = () => {
         <div id="auth">
             {
                 user == null ?
-                    <VkAuthWidget onAuth={onAuth}/> :
+                    <VkAuthWidget onAuth={onAuth} /> :
                     <>
-                        <img src={user.photo} alt="avatar"/>
+                        <img src={user.photo} alt="avatar" />
                         <div>{user.firstName} {user.lastName}</div>
                         <button onClick={() => setToken('')}>Logout</button>
                     </>
+            }
+            {
+                user == null ? <button onClick={async () => {
+
+                    let user = {
+                        "uid": 397839542,
+                        "first_name": "Артур",
+                        "last_name": "Сацкий",
+                        "photo": "https://sun9-20.userapi.com/s/v1/if2/xznq1fPzwxlZmmwq7ADhVURNNmYJFPnfRO80qxEiqrK1Rr69ZSXu-yccqFH26WpiPWxur7lsRT5hw9-Nqrn_AiVC.jpg?size=200x200&amp;quality=96&amp;crop=75,0,450,450&amp;ava=1",
+                        "photo_rec": "https://sun9-20.userapi.com/s/v1/if2/fxXpA0f4rgSRT8OK9uSzt8sObQW2kRH-M0ef-AAZWt1Mp4-ZeX8QW-Jy35wHSMNvZ4v4T2nXbac8s6rYI5qnXWwV.jpg?size=50x50&amp;quality=96&amp;crop=75,0,450,450&amp;ava=1",
+                        "hash": "dd9a8d6150b8291d678b0e9f16367701"
+                    };
+                    await onAuth(user);
+                }}>
+                    Auth
+                </button> : null
             }
         </div>
     );

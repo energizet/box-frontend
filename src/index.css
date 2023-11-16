@@ -11,15 +11,56 @@ body {
 }
 
 #wrapper {
+  display: flex;
+  flex-direction: column;
   max-width: 1200px;
   margin: auto;
+  min-height: 100vh;
+  padding: 30px;
 }
 
 #upload {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
+}
+
+#auth {
+  display: flex;
+  justify-content: space-between;
+}
+
+.authBlock {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: #8080805c;
+  padding: 10px;
+  border-radius: 7px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.authButton {
+  padding: 5px;
+  transition: .2s;
+}
+.authButton:hover{
+  background-color: #4CAF50;
+}
+
+.infoBlock {
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logoBlock h1 {
+  font-size: 28pt;
 }
 
 .urlInput {
@@ -45,13 +86,17 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 290px;
+  flex-grow: 1;
   justify-content: center;
   border: 3px dashed;
-  ;
+  padding: 20px;
   border-radius: 10px;
   transition: .2s;
   cursor: pointer;
+}
+
+.uploadBlock h1 {
+  text-align: center;
 }
 
 .uploadBlock:hover {
@@ -59,17 +104,24 @@ body {
 }
 
 .uploadText {
+  color: #ffffffb1;
   transition: .2s;
+}
+
+.uploadIcon {
+  font-size: 170px;
+  transition: .2s;
+  color: #ffffffb1;
 }
 
 .uploadBlock:hover .uploadText {
   scale: 1.1;
-  color: #ffffffb1;
+  color: #ffffff;
 }
 
 .uploadBlock:hover .uploadIcon {
   scale: 1.1;
-  color: #ffffffb1;
+  color: #ffffff;
 }
 
 .urlBlock {
@@ -78,12 +130,7 @@ body {
   gap: 20px;
 }
 
-.uploadIcon {
-  font-size: 150px;
-  transition: .2s;
-}
-
-.uploadButton {
+button {
   cursor: pointer;
   color: white;
   border: 2px solid #4CAF50;
@@ -94,15 +141,24 @@ body {
   transition: .2s;
 }
 
+.active {
+  color: #4CAF50 !important;
+}
+
 .uploadButton:hover {
   color: #222;
   background-color: #4CAF50;
-  ;
 }
-.uploadButton:disabled{
+
+.uploadButton:active:not(.uploadButton:disabled) {
+  scale: .9;
+}
+
+.uploadButton:disabled {
   cursor: not-allowed;
   border: 2px solid gray;
 }
-.uploadButton:disabled:hover{
+
+.uploadButton:disabled:hover {
   background-color: gray;
 }

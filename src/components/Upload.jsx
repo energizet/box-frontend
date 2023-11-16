@@ -10,6 +10,7 @@ const Upload = () => {
         setInputFile(e.target.files[0])
     }
 
+
     return (
         <div id="upload">
             <div className="urlBlock">
@@ -55,9 +56,9 @@ const Upload = () => {
             </div>
 
             <div className="uploadBlock" onClick={() => document.getElementById('fileInput').click()}>
-                {inputFile && <h1 className='uploadText'>{inputFile.name}</h1>}
-                <FaCloudUploadAlt className='uploadIcon' />
-                <h2 className='uploadText'>Выберите файл</h2>
+                {inputFile && <h1 className={`${inputFile&&'active'}`}>{inputFile.name}</h1>}
+                <FaCloudUploadAlt className={`uploadIcon ${inputFile&&'active'}`} />
+                <h2 className={`uploadText ${inputFile&&'active'}`} >Выберите файл</h2>
                 <input
                     id="fileInput"
                     type="file"

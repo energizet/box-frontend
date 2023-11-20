@@ -16,7 +16,7 @@ const Upload = () => {
             <div className="urlBlock">
                 <input
                     className='urlInput'
-                    placeholder='ВСТАВЬТЕ URL ПРОФИЛЯ'
+                    placeholder='Вставьте url получатля'
                     type="text"
                     value={vkLink}
                     onChange={e => setVkLink(e.target.value)} />

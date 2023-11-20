@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import VkAuthWidget from "./VkAuthWidget";
+import { Link } from 'react-router-dom';
 
 const Auth = () => {
     let [user, setUser] = useState();
@@ -29,7 +30,8 @@ const Auth = () => {
     return (
         <div id="auth">
             <div className="logoBlock">
-                <h1>box</h1>
+                <Link><h1>Box</h1></Link>
+
             </div>
             <div className="authBlock">
                 {
@@ -38,7 +40,7 @@ const Auth = () => {
                         <>
                             <img className='avatar' src={user.photo} alt="avatar" />
                             <div className="infoBlock">
-                                <div>{user.firstName} {user.lastName}</div>
+                                <div className='userName'>{user.firstName} {user.lastName}</div>
                                 <button className='authButton' onClick={() => setToken('')}>Logout</button>
                             </div>
                         </>

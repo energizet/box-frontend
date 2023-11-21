@@ -25,7 +25,6 @@ const File = () => {
 
 function FilePage(file) {
     const fileDownloader = () => {
-        console.log(file.title);
         let a = document.createElement('a');
         a.download = file.title;
         a.click()
@@ -49,7 +48,7 @@ function FilePage(file) {
                 a.click()
             }
 
-            return <div className='downloadBlock'>
+            return <div className='downloadBlock wrappBlocks'>
                 <h2>{file.name}</h2>
                 <button onClick={down}>Скачать</button>
                 <h3>
@@ -59,16 +58,17 @@ function FilePage(file) {
             </div>;
         }
 
-        return <img src={url} alt={file.name} />
+        return <div className="wrappBlocks">
+            <img src={url} alt={file.name} />
+        </div>
     }
 
 
-    return <div id="file">
+    return <div id="file" className='recipientUser wrappBlocks'>
         <div>File: {file.title}</div>
         <div>For user:</div>
-        <img src={file.vkUser.photo} alt="avatar" />
+        <img className='avatar' src={file.vkUser.photo} alt="avatar" />
         <div>{file.vkUser.firstName} {file.vkUser.lastName}</div>
-        <button onClick={fileDownloader}>Скаать</button>
     </div>
 }
 

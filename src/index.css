@@ -51,9 +51,6 @@ a {
   display: flex;
   gap: 10px;
   align-items: center;
-  background: var(--secondary-bg-color);
-  padding: 10px;
-  border-radius: 7px;
 }
 
 .avatar {
@@ -116,14 +113,12 @@ button:hover {
 }
 
 .uploadText {
-  color: #ffffffb1;
   transition: 0.2s;
 }
 
 .uploadIcon {
   font-size: 170px;
   transition: 0.2s;
-  color: #ffffffb1;
 }
 
 .uploadBlock:hover .uploadText,
@@ -169,7 +164,38 @@ button {
 
 .active {
   border-color: var(--main-color);
-  color: var(--main-color) !important;
+  color: var(--main-color) !important
+}
+
+.wrappBlocks {
+  background: var(--secondary-bg-color);
+  padding: 10px;
+  border-radius: 7px;
+  width: max-content;
+}
+
+.loadingButton {
+  background: #e2dc1f !important;
+  cursor: no-drop;
+  color: #222;
+  border: 0;
+}
+
+.loadingBlock,
+.loadingBlock * {
+  border-color: #e2dc1f;
+  color: #e2dc1f !important;
+}
+
+.uploadBlock.loadingBlock:hover .uploadText,
+.uploadBlock.loadingBlock:hover {
+  transform: scale(1);
+  background-color: transparent ;
+  cursor: no-drop;
+}
+
+.loadingIcon {
+  animation: rotate 4s linear infinite;
 }
 
 .downloadBlock {
@@ -177,15 +203,38 @@ button {
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  width: 50%;
-  margin: auto;
+  margin: auto 0;
+  padding: 25px;
 }
-.downloadBlock h2{
+
+.downloadBlock h2 {
   text-align: center;
+  word-wrap: break-word;
+  max-width: 100%;
 }
-.downloadBlock button{
+
+.downloadBlock button {
   font-size: 24px;
 }
+
+.recipientUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  margin: 0 auto;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media screen and (max-width: 767px) {
   button {
     padding: 5px 15px;

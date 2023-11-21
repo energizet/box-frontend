@@ -33,7 +33,7 @@ const Auth = () => {
                 <Link><h1>Box</h1></Link>
 
             </div>
-            <div className="authBlock">
+            <div className="authBlock wrappBlocks">
                 {
                     user == null ?
                         <VkAuthWidget onAuth={onAuth} /> :

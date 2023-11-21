@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { AiOutlineReload } from "react-icons/ai";
 
 const Upload = () => {
     let navigate = useNavigate();
     let [vkLink, setVkLink] = useState('https://vk.com/byedie666');
     let [inputFile, setInputFile] = useState(null);
+    let [loading, setLoading] = useState(false)
+
     const handleFileChange = (e) => {
-        setInputFile(e.target.files[0])
+        !e.target.files.length && setLoading(false)
+        setInputFile(e.target.files[0]);
     }
 
 
@@ -21,13 +25,15 @@ const Upload = () => {
                     value={vkLink}
                     onChange={e => setVkLink(e.target.value)} />
                 <button
-                    className='uploadButton'
+                    className={`uploadButton ${loading && 'loadingButton'}`}
                     disabled={inputFile && vkLink ? false : true}
                     onClick={async () => {
                         let file = inputFile;
                         if (file == null) {
                             return;
                         }
+
+                        setLoading(true);
 
                         let formData = new FormData();
                         formData.append('file', file, file.name);
@@ -49,16 +55,21 @@ const Upload = () => {
                             },
                         }).then(d => d.json());
 
+                        setLoading(false);
+
                         navigate(`/file/${fileRes.id}`);
                     }}>
-                    Upload
+                    {loading ? 'Загрузка...' : 'Upload'}
                 </button>
             </div>
 
-            <div className={`uploadBlock ${inputFile&&'active'}`} onClick={() => document.getElementById('fileInput').click()}>
-                {inputFile && <h1 className={`${inputFile&&'active'}`}>{inputFile.name}</h1>}
-                <FaCloudUploadAlt className={`uploadIcon ${inputFile&&'active'}`} />
-                <h2 className={`uploadText ${inputFile&&'active'}`} >Выберите файл</h2>
+            <div className={`uploadBlock ${inputFile && 'active'} ${loading && 'loadingBlock'}`} onClick={() => document.getElementById('fileInput').click()}>
+                {inputFile && <h1 className={`${inputFile && 'active'}`}>{inputFile.name}</h1>}
+                {
+                    loading ? <AiOutlineReload className={`uploadIcon loadingIcon`} /> :
+                        <FaCloudUploadAlt className={`uploadIcon ${inputFile && 'active'}`} />
+                }
+                <h2 className={`uploadText ${inputFile && 'active'}`} > {loading ? 'Загрузка файла...' : 'Выберите файл'}</h2>
                 <input
                     id="fileInput"
                     type="file"

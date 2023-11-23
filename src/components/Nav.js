@@ -9,8 +9,6 @@ const Nav = () => {
     return (
         <nav>
             <NavLink to="/" style={navStyle}>Upload</NavLink>
-            <NavLink to="/" style={navStyle}>Upload</NavLink>
-            <NavLink to="/" style={navStyle}>Upload</NavLink>
         </nav>
     );
 };

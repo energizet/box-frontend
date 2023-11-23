@@ -10,6 +10,7 @@ const Nav = () => {
         <nav>
             <NavLink to="/" style={navStyle}>Upload</NavLink>
             <NavLink to="/" style={navStyle}>Upload</NavLink>
+            <NavLink to="/" style={navStyle}>Upload</NavLink>
         </nav>
     );
 };

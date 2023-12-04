@@ -8,8 +8,7 @@ const Nav = () => {
     
     return (
         <nav>
-            <NavLink to="/" style={navStyle}>Upload</NavLink>
-            <NavLink to="/file/838c98d1-4564-4bf8-91f2-26e0ef3ed2a4" style={navStyle}>Photo</NavLink>
+            {/* <NavLink to="/" style={navStyle}>Upload</NavLink> */}
         </nav>
     );
 };

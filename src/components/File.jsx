@@ -24,11 +24,7 @@ const File = () => {
 };
 
 function FilePage(file) {
-    const fileDownloader = () => {
-        let a = document.createElement('a');
-        a.download = file.title;
-        a.click()
-    }
+
 
 
     if (file == null) {

@@ -5,15 +5,16 @@ import { AiOutlineReload } from "react-icons/ai";
 
 const Upload = () => {
     let navigate = useNavigate();
-    let [vkLink, setVkLink] = useState('https://vk.com/byedie666');
+    let [vkLink, setVkLink] = useState('');
     let [inputFile, setInputFile] = useState(null);
-    let [loading, setLoading] = useState(false)
+    let [loading, setLoading] = useState(false);
 
     const handleFileChange = (e) => {
-        !e.target.files.length && setLoading(false)
+        if (!e.target.files.length) {
+            setLoading(false);
+        }
         setInputFile(e.target.files[0]);
-    }
-
+    };
 
     return (
         <div id="upload">
@@ -26,7 +27,7 @@ const Upload = () => {
                     onChange={e => setVkLink(e.target.value)} />
                 <button
                     className={`uploadButton ${loading && 'loadingButton'}`}
-                    disabled={inputFile && vkLink ? false : true}
+                    disabled={inputFile == null || vkLink === ''}
                     onClick={async () => {
                         let file = inputFile;
                         if (file == null) {
@@ -63,8 +64,10 @@ const Upload = () => {
                 </button>
             </div>
 
-            <div className={`uploadBlock ${inputFile && 'active'} ${loading && 'loadingBlock'}`} onClick={() => document.getElementById('fileInput').click()}>
-                {inputFile && <h1 className={`${inputFile && 'active'}`}>{inputFile.name}</h1>}
+            <div className={`uploadBlock ${inputFile && 'active'} ${loading && 'loadingBlock'}`}
+                onClick={() => document.getElementById('fileInput').click()}
+            >
+                {inputFile && <h1 lang="ru" className={`${inputFile && 'active'}`}>{inputFile.name}</h1>}
                 {
                     loading ? <AiOutlineReload className={`uploadIcon loadingIcon`} /> :
                         <FaCloudUploadAlt className={`uploadIcon ${inputFile && 'active'}`} />

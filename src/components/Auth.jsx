@@ -45,7 +45,7 @@ const Auth = () => {
                             </div>
                         </>
                 }
-                {
+                {/* {
                     user == null ? <button onClick={async () => {
 
                         let user = {
@@ -60,7 +60,7 @@ const Auth = () => {
                     }}>
                         Auth
                     </button> : null
-                }
+                } */}
             </div>
         </div>
     );

@@ -6,6 +6,7 @@
   --box-shadow-color: #ffffff5d;
   --hover-bg-color: #99999911;
   --hover-text-color: #ffffff;
+
 }
 
 * {
@@ -87,7 +88,7 @@ button:hover {
 }
 
 .urlInput:focus {
-  box-shadow: 0px 0px 3px 4px var(--box-shadow-color);
+  box-shadow: 0px 0px 3px 2px var(--box-shadow-color);
 }
 
 .uploadBlock {
@@ -100,12 +101,14 @@ button:hover {
   border: 3px dashed;
   padding: 20px;
   border-radius: 10px;
-  transition: 0.2s;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .uploadBlock h1 {
+  word-break: break-all;
   text-align: center;
+  transition: 0.2s;
 }
 
 .uploadBlock:hover {
@@ -163,6 +166,7 @@ button {
 }
 
 .active {
+  transition: .3s;
   border-color: var(--main-color);
   color: var(--main-color) !important
 }
@@ -190,7 +194,7 @@ button {
 .uploadBlock.loadingBlock:hover .uploadText,
 .uploadBlock.loadingBlock:hover {
   transform: scale(1);
-  background-color: transparent ;
+  background-color: transparent;
   cursor: no-drop;
 }
 

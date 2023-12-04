@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import VkAuthWidget from "./VkAuthWidget";
+import { Link } from 'react-router-dom';
 
 const Auth = () => {
     let [user, setUser] = useState();
@@ -28,15 +29,23 @@ const Auth = () => {
 
     return (
         <div id="auth">
-            {
-                user == null ?
-                    <VkAuthWidget onAuth={onAuth}/> :
-                    <>
-                        <img src={user.photo} alt="avatar"/>
-                        <div>{user.firstName} {user.lastName}</div>
-                        <button onClick={() => setToken('')}>Logout</button>
-                    </>
-            }
+            <div className="logoBlock">
+                <Link><h1>Box</h1></Link>
+
+            </div>
+            <div className="authBlock wrappBlocks">
+                {
+                    user == null ?
+                        <VkAuthWidget onAuth={onAuth} /> :
+                        <>
+                            <img className='avatar' src={user.photo} alt="avatar" />
+                            <div className="infoBlock">
+                                <div className='userName'>{user.firstName} {user.lastName}</div>
+                                <button className='authButton' onClick={() => setToken('')}>Logout</button>
+                            </div>
+                        </>
+                }
+            </div>
         </div>
     );
 };

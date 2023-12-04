@@ -1,5 +1,252 @@
-body {
+:root {
+  --main-bg-color: #222;
+  --main-text-color: white;
+  --main-color: #4CAF50;
+  --secondary-bg-color: #8080805c;
+  --box-shadow-color: #ffffff5d;
+  --hover-bg-color: #99999911;
+  --hover-text-color: #ffffff;
+
+}
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: var(--hover-text-color);
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: auto;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+#upload {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+#auth {
+  display: flex;
+  justify-content: space-between;
+}
+
+.authBlock {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.authButton {
+  padding: 5px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: var(--main-color);
+}
+
+.infoBlock {
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logoBlock h1 {
+  font-size: 28pt;
+}
+
+.urlInput {
+  font-size: 16px;
+  width: 100%;
+  padding: 6px;
+  outline: 0;
+  border: 0;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+.urlInput:focus {
+  box-shadow: 0px 0px 3px 2px var(--box-shadow-color);
+}
+
+.uploadBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+  justify-content: center;
+  border: 3px dashed;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.uploadBlock h1 {
+  word-break: break-all;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.uploadBlock:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.uploadText {
+  transition: 0.2s;
+}
+
+.uploadIcon {
+  font-size: 170px;
+  transition: 0.2s;
+}
+
+.uploadBlock:hover .uploadText,
+.uploadBlock:hover .uploadIcon {
+  transform: scale(1.1);
+  color: var(--hover-text-color);
+}
+
+.urlBlock {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+button {
+  cursor: pointer;
+  color: white;
+  border: 2px solid var(--main-color);
+  background-color: transparent;
+  padding: 8px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.uploadButton:hover {
+  color: var(--main-bg-color);
+  background-color: var(--main-color);
+}
+
+.uploadButton:active:not(.uploadButton:disabled) {
+  transform: scale(0.9);
+}
+
+.uploadButton:disabled {
+  cursor: not-allowed;
+  border: 2px solid gray;
+}
+
+.uploadButton:disabled:hover {
+  background-color: gray;
+}
+
+.active {
+  transition: .3s;
+  border-color: var(--main-color);
+  color: var(--main-color) !important
+}
+
+.wrappBlocks {
+  background: var(--secondary-bg-color);
+  padding: 10px;
+  border-radius: 7px;
+  width: max-content;
+}
+
+.loadingButton {
+  background: #e2dc1f !important;
+  cursor: no-drop;
+  color: #222;
+  border: 0;
+}
+
+.loadingBlock,
+.loadingBlock * {
+  border-color: #e2dc1f;
+  color: #e2dc1f !important;
+}
+
+.uploadBlock.loadingBlock:hover .uploadText,
+.uploadBlock.loadingBlock:hover {
+  transform: scale(1);
+  background-color: transparent;
+  cursor: no-drop;
+}
+
+.loadingIcon {
+  animation: rotate 4s linear infinite;
+}
+
+.downloadBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin: auto 0;
+  padding: 25px;
+}
+
+.downloadBlock h2 {
+  text-align: center;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.downloadBlock button {
+  font-size: 24px;
+}
+
+.recipientUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  margin: 0 auto;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  button {
+    padding: 5px 15px;
+    font-size: 14px;
+  }
+
+  .authBlock {
+    padding: 7px;
+    font-size: 14px;
+  }
 }
